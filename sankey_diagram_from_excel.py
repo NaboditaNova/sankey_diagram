@@ -1,7 +1,7 @@
 import pandas as pd
 import plotly.graph_objects as go
 
-df = pd.read_excel('combined_summary_full.xlsx')
+df = pd.read_excel('combined_summary_full_v2.xlsx')
 df = df.fillna(method='ffill')
 
 # Extract values from the first row (row index 0)
