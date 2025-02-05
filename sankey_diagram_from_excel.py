@@ -1,7 +1,7 @@
 import pandas as pd
 import plotly.graph_objects as go
 
-df = pd.read_excel('combined_summary_4.xlsx')
+df = pd.read_excel('combined_summary_full.xlsx')
 df = df.fillna(method='ffill')
 
 # Extract values from the first row (row index 0)
@@ -66,35 +66,35 @@ source_indices = [label_to_index[link['source']] for link in links]
 target_indices = [label_to_index[link['target']] for link in links]
 values = [link['value'] for link in links]
 
-node_colors = [
-    # "rgba(31, 119, 180, 0.8)",  # Process_collection
-    # "goldenrod", # Process_collection
-    "lavender", # Process_collection
-    # "rgba(255, 127, 14, 0.8)",  # Plastics in Households
-    "mediumaquamarine", # Plastics in Households
-    "rgba(44, 160, 44, 0.8)",   # PET Deposit
-    # "rgba(214, 39, 40, 0.8)",   # Plastics in Different DS
-    # "slateblue", # Plastics in Different DS
-    "darksalmon", # Plastics in Different DS
-    "rgba(148, 103, 189, 0.8)", # Waste
-    "rgba(140, 86, 75, 0.8)",   # Mixed Plastics
-    "rgba(227, 119, 194, 0.8)", # PP-flow
-    "rgba(127, 127, 127, 0.8)", # PS-flow
-    "rgba(188, 189, 34, 0.8)",  # PET-flow
-    "rgba(23, 190, 207, 0.8)",  # HDPE-flow
-    "rgba(31, 119, 180, 0.8)",  # Film-flow
-    "rgba(255, 127, 14, 0.8)",  # PP in PP sorted Products
-    "rgba(44, 160, 44, 0.8)",   # PP in other sorted products
-    "rgba(214, 39, 40, 0.8)",   # Food PP
-    "rgba(148, 103, 189, 0.8)", # Non-food PP
-    "rgba(140, 86, 75, 0.8)",   # Mixed Packaging PP
-    "rgba(227, 119, 194, 0.8)", # Trays PP
-    "rgba(127, 127, 127, 0.8)", # MaD PP
-    "rgba(188, 189, 34, 0.8)"   # PP recycling residues
-]
+# node_colors = [
+#     # "rgba(31, 119, 180, 0.8)",  # Process_collection
+#     # "goldenrod", # Process_collection
+#     "lavender", # Process_collection
+#     # "rgba(255, 127, 14, 0.8)",  # Plastics in Households
+#     "mediumaquamarine", # Plastics in Households
+#     "rgba(44, 160, 44, 0.8)",   # PET Deposit
+#     # "rgba(214, 39, 40, 0.8)",   # Plastics in Different DS
+#     # "slateblue", # Plastics in Different DS
+#     "darksalmon", # Plastics in Different DS
+#     "rgba(148, 103, 189, 0.8)", # Waste
+#     "rgba(140, 86, 75, 0.8)",   # Mixed Plastics
+#     "rgba(227, 119, 194, 0.8)", # PP-flow
+#     "rgba(127, 127, 127, 0.8)", # PS-flow
+#     "rgba(188, 189, 34, 0.8)",  # PET-flow
+#     "rgba(23, 190, 207, 0.8)",  # HDPE-flow
+#     "rgba(31, 119, 180, 0.8)",  # Film-flow
+#     "rgba(255, 127, 14, 0.8)",  # PP in PP sorted Products
+#     "rgba(44, 160, 44, 0.8)",   # PP in other sorted products
+#     "rgba(214, 39, 40, 0.8)",   # Food PP
+#     "rgba(148, 103, 189, 0.8)", # Non-food PP
+#     "rgba(140, 86, 75, 0.8)",   # Mixed Packaging PP
+#     "rgba(227, 119, 194, 0.8)", # Trays PP
+#     "rgba(127, 127, 127, 0.8)", # MaD PP
+#     "rgba(188, 189, 34, 0.8)"   # PP recycling residues
+# ]
 
 # For link colors, we assign each link the color of its source node.
-link_colors = [node_colors[label_to_index[link['source']]] for link in links]
+# link_colors = [node_colors[label_to_index[link['source']]] for link in links]
 
 
 # For links, we'll use a uniform color extracted from the JSON snippet's link colors.
@@ -113,14 +113,14 @@ fig = go.Figure(data=[go.Sankey(
         line=dict(color="black", width=0.5),
         label=node_labels,
         # color="blue"
-        color = node_colors
+        # color = node_colors
     ),
     link=dict(
         source=source_indices,  # List of source node indices
         target=target_indices,  # List of target node indices
         value=values,           # List of link values
         # color="gray"
-        color = link_colors
+        # color = link_colors
     )
 )])
 
