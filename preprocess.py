@@ -5,8 +5,17 @@ def process_excel(input_path, output_path):
     sheet_names = [
     "Process_collection", 
     "Process_sorting_flow_1", 
-    "Process_sorting_flow_2_PP", 
-    "Process_recycling_PP"
+    "Process_sorting_flow_2_PP",
+    "Process_sorting_flow_2_PS",
+    "Process_sorting_flow_2_PET",
+    "Process_sorting_flow_2_HDPE",
+    "Process_sorting_flow_2_Film",
+    "Process_recycling_PP",
+    "Process_recycling_PS",
+    "Process_recycling_PET",
+    "Process_recycling_HDPE",
+    "Process_recycling_Film",
+    "Process_recycling_MP"
     ]
 
     # List to hold all summary rows from all sheets
