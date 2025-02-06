@@ -6,10 +6,10 @@ import preprocess
 import visualization
 import color_options as co
 
-file_path = r'2025_01_29_combined_table_implementation.xlsm'
+input_excel_path = r'2025_01_29_combined_table_implementation.xlsm'
 output_excel_path = r'combined_summary_full_v3.xlsx'
 
-preprocess.process_excel(file_path, output_excel_path)
+preprocess.process_excel(input_excel_path, output_excel_path)
 
 nodes, links = visualization.process_data_hierarchical(output_excel_path)
 node_labels, label_to_index, source_indices, target_indices, values = visualization.prepare_data_for_plotly_sankey(nodes, links)

@@ -17,14 +17,12 @@ def process_data_hierarchical(input_file_path):
     link_value   = df.iloc[0, 2]  # Value at position (0,2)
 
     # Create the nodes part:
-    # Since you want a list of nodes (each node being a dictionary with a 'label' key)
     nodes = [
         {'label': node_label_1},
         {'label': node_label_2}
     ]
 
     # Create the link part:
-    # Each link is a dictionary with 'source', 'target', and 'value'
     links = [
         {
             'source': node_label_1,  # from the value at (0,0)
