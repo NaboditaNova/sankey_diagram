@@ -7,7 +7,7 @@ import visualization
 import color_options as co
 
 input_path = r'2025_01_29_combined_table_implementation.xlsm'
-output_path = r'YOUR_FILE_PATH_HERE.xlsx'
+output_path = r'YOUR_FILE_PATH_HERE'
 
 preprocess.process_excel(input_path, output_path)
 
