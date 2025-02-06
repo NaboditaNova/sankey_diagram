@@ -22,7 +22,7 @@ def process_excel(input_path, output_path):
     "Process_recycling_MP"
     ]
 
-    all_summary_rows = []
+    summary = []
 
     for sheet in sheet_names:
 
@@ -35,22 +35,22 @@ def process_excel(input_path, output_path):
         output_block = df.iloc[77:84, [1, 3, 4]]
         output_block = output_block.dropna(subset=[output_block.columns[0]])
         
-        first_output = True
+        output_0 = True
 
         for idx, row in output_block.iterrows():
 
-            if first_output:
-                all_summary_rows.append({
+            if output_0:
+                summary.append({
                     "Process Name": sheet,
                     "Input Material Name": input_material_name,
                     "Input Material Amount": input_material_amount,
                     "Output Material Name": row.iloc[0],
                     "Output Material Amount": row.iloc[1]
                 })
-                first_output = False
-                
+                output_0 = False
+
             else:
-                all_summary_rows.append({
+                summary.append({
                     "Process Name": "",
                     "Input Material Name": "",
                     "Input Material Amount": "",
@@ -58,9 +58,8 @@ def process_excel(input_path, output_path):
                     "Output Material Amount": row.iloc[1]
                 })
 
-    summary_df = pd.DataFrame(all_summary_rows)
+    summary_df = pd.DataFrame(summary)
 
     output_excel_path = output_path
     summary_df.to_excel(output_excel_path, index=False)
     print(f"\nCombined summary has been written to: {output_excel_path}")
-
