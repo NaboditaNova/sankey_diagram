@@ -7,7 +7,7 @@ import visualization
 import color_options as co
 
 input_excel_path = r'2025_01_29_combined_table_implementation.xlsm'
-output_excel_path = r'combined_summary_full_v3.xlsx'
+output_excel_path = r'YOUR_FILE_PATH_HERE'
 
 preprocess.process_excel(input_excel_path, output_excel_path)
 
@@ -16,5 +16,5 @@ node_labels, label_to_index, source_indices, target_indices, values = visualizat
 
 node_colors, link_colors = co.generate_color_options(links, label_to_index)
 
-diagram_title = "Plastic Waste Management - Sankey Diagram"
+diagram_title = "YOUR DIAGRAM TITLE HERE"
 visualization.create_sankey_diagram(node_labels, source_indices, target_indices, values, node_colors, link_colors, diagram_title)
