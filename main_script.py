@@ -1,3 +1,7 @@
+#################################
+#   Author: Nabodita Anam Nova  #
+#################################
+
 import preprocess
 import visualization
 import color_options as co

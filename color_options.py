@@ -1,3 +1,7 @@
+#################################
+#   Author: Nabodita Anam Nova  #
+#################################
+
 def generate_color_options(links, label_to_index):
     # node_colors = [
     #     # "rgba(31, 119, 180, 0.8)",  # Process_collection
