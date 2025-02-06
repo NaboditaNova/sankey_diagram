@@ -98,26 +98,26 @@ values = [link['value'] for link in links]
 # Step 2: Define 49 individual node colors
 # -------------------------------------------------
 node_colors = [
-    "rgba(31,119,180,0.8)",    #  1. Process_collection
-    "rgba(255,127,14,0.8)",    #  2. Plastics in Households
+    "rgba(114, 174, 214, 0.8)",    #  1. Process_collection
+    "rgba(145, 212, 201, 0.8)",    #  2. Plastics in Households
     "rgba(44,160,44,0.8)",     #  3. PET Deposit
-    "rgba(214,39,40,0.8)",     #  4. Plastics in Different DS
-    "rgba(148,103,189,0.8)",   #  5. Waste
+    "rgba(145, 161, 231, 0.8)",     #  4. Plastics in Different DS
+    "rgba(0, 0, 0, 0.8)",   #  5. Waste
     "rgba(140,86,75,0.8)",     #  6. Mixed Plastics
-    "rgba(227,119,194,0.8)",   #  7. PP-flow
-    "rgba(127,127,127,0.8)",   #  8. PS-flow
+    "rgba(25, 206, 37, 0.8)",   #  7. PP-flow
+    "rgba(244, 213, 36, 0.93)",   #  8. PS-flow
     "rgba(188,189,34,0.8)",    #  9. PET-flow
-    "rgba(23,190,207,0.8)",    # 10. HDPE-flow
-    "rgba(174,199,232,0.8)",   # 11. Film-flow
-    "rgba(255,187,120,0.8)",   # 12. PP in PP sorted products
+    "rgba(0, 85, 255, 0.99)",    # 10. HDPE-flow
+    "rgba(189, 47, 210, 0.8)",   # 11. Film-flow
+    "rgb(255, 0, 0)",   # 12. PP in PP sorted products
     "rgba(152,223,138,0.8)",   # 13. PP in other sorted products
-    "rgba(255,152,150,0.8)",   # 14. PS in PS sorted products
+    "rgb(0, 255, 187)",   # 14. PS in PS sorted products
     "rgba(197,176,213,0.8)",   # 15. PS in other sorted products
     "rgba(196,156,148,0.8)",   # 16. PET in PET sorted products
     "rgba(247,182,210,0.8)",   # 17. PET in other sorted products
-    "rgba(199,199,199,0.8)",   # 18. HDPE in HDPE sorted products
+    "rgba(204, 255, 0, 0.8)",   # 18. HDPE in HDPE sorted products
     "rgba(219,219,141,0.8)",   # 19. HDPE in other sorted products
-    "rgba(158,218,229,0.8)",   # 20. Film in film sorted products
+    "rgb(0, 217, 255)",   # 20. Film in film sorted products
     "rgba(255,0,0,0.8)",       # 21. Film in other sorted products
     "rgba(0,255,0,0.8)",       # 22. Food PP
     "rgba(0,0,255,0.8)",       # 23. Non-food PP
