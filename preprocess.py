@@ -79,3 +79,63 @@ def process_excel(input_path, output_path):
     summary_df.to_excel(output_excel_path, index=False)
     print(f"\nCombined summary has been written to: {output_excel_path}")
 
+def process_material_composition(input_path, output_path):
+    # List of sheet names to process (provide the names here)
+    
+    # sheet_names = [
+    #     "MFA_Template_collection",  # Add other sheet names here
+    #     "MFA_Template_sorting_flow_1",   # Example sheet names
+    #     "MFA_Template_sorting_flow_2_PP",
+    #     "MFA_Template_sorting_flow_2_PS",
+    #     "MFA_Template_sorting_flow_2_PET",
+    #     "MFA_Template_sorting_flow_2_HDP",
+    #     "MFA_Template_sorting_flow_2_Fil"
+
+    #     # Add all other required sheet names here
+    # ]
+
+    sheet_names = [
+        "MFA_Template_collection",  # Add other sheet names here
+        "MFA_Template_sorting_flow_2_PP",
+        "MFA_Template_sorting_flow_2_PS",
+        "MFA_Template_sorting_flow_2_PET",
+        "MFA_Template_sorting_flow_2_HDP",
+        "MFA_Template_sorting_flow_2_Fil"
+
+        # Add all other required sheet names here
+    ]
+
+    # Initialize an empty DataFrame to hold all data
+    combined_data = pd.DataFrame()
+
+    # Loop through each sheet
+    for sheet_name in sheet_names:
+        # Read the current sheet into a DataFrame
+        df = pd.read_excel(input_path, sheet_name=sheet_name, header=0)
+        
+        # Extract the "Material Name" from the column names
+        material_name = df.columns[2]  # Extract header of the third column (Column C in Excel)
+
+        # Extract relevant rows for "Name of the Materials" and "Amount"
+        materials_df = df.iloc[14:30, [1, 2]]  # Rows 15–25 (indices 14–24), Columns B and C
+        
+        # Rename the columns for clarity
+        materials_df.columns = ["Name of the Materials", "Amount"]
+        
+        # Remove rows with blank values in the "Name of the Materials" or "Amount" columns
+        materials_df = materials_df.dropna(subset=["Name of the Materials", "Amount"])
+        
+        # Add the "Name of the sheet" and "Material name" columns to the extracted data
+        materials_df["Name of the sheet"] = sheet_name
+        materials_df["Material name"] = material_name
+        
+        # Reorder columns to match the desired format
+        materials_df = materials_df[["Name of the sheet", "Material name", "Name of the Materials", "Amount"]]
+        
+        # Append the current sheet's data to the combined DataFrame
+        combined_data = pd.concat([combined_data, materials_df], ignore_index=True)
+
+    # Write the combined data to a new Excel file
+    combined_data.to_excel(output_path, index=False)
+
+    print(f"Combined Excel file has been created: {output_path}")
