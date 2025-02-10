@@ -141,7 +141,7 @@ def process_excel_generate_material_composition(input_path, output_path):
     print(f"Combined Excel file has been created: {output_path}")
 
 
-def generate_annotations(file_path):
+def process_excel_generate_annotations(file_path):
     # Read the Excel file into a DataFrame
     df = pd.read_excel(file_path)
 
