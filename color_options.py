@@ -94,3 +94,53 @@ def generate_color_options(links, label_to_index):
     # link_colors = ["rgba(0,0,96,0.2)"] * len(links)
 
     return node_colors, link_colors
+
+def generate_node_positions():
+    
+    # -- Build the x–coordinate list (by node index) --
+    node_x = [
+        0.0,             # index 0, level 1
+        0.2,             # index 1, level 2
+        0.4, 0.4, 0.4,   # indices 2–4, level 3
+        0.6, 0.6, 0.6, 0.6, 0.6, 0.6,  # indices 5–10, level 4
+        # indices 11–20 (level 5 sorted–products)
+        0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8,
+        # indices 21–45 (level 6)
+        *[1.0]*25,
+        # indices 46–48 (level 5: MPO, MaD MP, MP recycling residues)
+        0.8, 0.8, 0.8
+    ]
+
+    # -- Build the y–coordinate list (by node index) --
+    node_y = [
+        0.5,             # index 0, level 1
+        0.5,             # index 1, level 2
+        0.25, 0.5, 0.75, # indices 2–4, level 3
+        0.143, 0.286, 0.429, 0.571, 0.714, 0.857,  # indices 5–10, level 4
+
+        # For level 5, we assign according to the desired overall rank (1 to 13):
+        # (Note: although in your node list the sorted–products come first, we want
+        #  the three that should be at the top (MPO, etc.) to have the lowest y values.)
+        # Here we “pretend” that the 10 sorted–products nodes (which are at indices 11–20)
+        # get ranks 4–13.
+        0.286,  # rank 4 → index 11 ("PP in PP sorted products")
+        0.357,  # rank 5 → index 12 ("PP in other sorted products")
+        0.429,  # rank 6 → index 13 ("PS in PS sorted products")
+        0.500,  # rank 7 → index 14 ("PS in other sorted products")
+        0.571,  # rank 8 → index 15 ("PET in PET sorted products")
+        0.643,  # rank 9 → index 16 ("PET in other sorted products")
+        0.714,  # rank 10 → index 17 ("HDPE in HDPE sorted products")
+        0.786,  # rank 11 → index 18 ("HDPE in other sorted products")
+        0.857,  # rank 12 → index 19 ("Film in film sorted products")
+        0.929,  # rank 13 → index 20 ("Film in other sorted products")
+
+        # Level 6: 25 nodes, using y = rank/26
+        1/26, 2/26, 3/26, 4/26, 5/26, 6/26, 7/26, 8/26, 9/26, 10/26,
+        11/26, 12/26, 13/26, 14/26, 15/26, 16/26, 17/26, 18/26, 19/26, 20/26,
+        21/26, 22/26, 23/26, 24/26, 25/26,
+
+        # Level 5 (the three that should be at the top) – assign ranks 1, 2, 3:
+        1/14, 2/14, 3/14
+    ]
+
+    return node_x, node_y

@@ -75,16 +75,20 @@ def prepare_data_for_plotly_sankey(nodes, links):
 
 
 # Create Sankey Diagram
-def create_sankey_diagram(node_labels, source_indices, target_indices, values, node_colors, link_colors, diagram_title):
+def create_sankey_diagram(node_labels, source_indices, target_indices, values, node_colors, link_colors, node_x, node_y, diagram_title):
     fig = go.Figure(data=[go.Sankey(
-    arrangement="freeform",  # perpendicular, freeform, fixed, or snap
+    arrangement="freeform",
+    valueformat = ".0f",
+    valuesuffix = "ton",  # perpendicular, freeform, fixed, or snap
     node=dict(
         pad=15,
         thickness=20,
         line=dict(color="black", width=0.5),
         label=node_labels,
         # color="blue"
-        color = node_colors
+        color = node_colors,
+        x=node_x,
+        y=node_y,
     ),
     link=dict(
         source=source_indices,  # List of source node indices
