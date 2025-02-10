@@ -145,7 +145,7 @@ def generate_node_positions():
 
     return node_x, node_y
 
-def generate_annotations(annotations_dict, label_to_position):
+def generate_annotations(annotations_dict, label_to_index, node_x, node_y):
     """
     Generate a list of annotation dictionaries for Plotly layout,
     based on the annotations_dict where keys are node labels and values

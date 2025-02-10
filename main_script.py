@@ -20,9 +20,7 @@ node_labels, label_to_index, source_indices, target_indices, values = visualizat
 node_colors, link_colors = co.generate_color_options(links, label_to_index)
 node_x, node_y = co.generate_node_positions()
 
-# annotations = co.generate_annotations(annotations_dict, label_to_index, node_x, node_y)
+annotations = co.generate_annotations(annotations_dict, label_to_index, node_x, node_y)
 
 diagram_title = "Plastic Waste Management - Sankey Diagram"
-visualization.create_sankey_diagram(node_labels, source_indices, target_indices, values, 
-                                    node_colors, link_colors, node_x, node_y, diagram_title, 
-                                    label_to_index, annotations_dict)
+visualization.create_sankey_diagram(node_labels, source_indices, target_indices, values, node_colors, link_colors, node_x, node_y, diagram_title, annotations)
