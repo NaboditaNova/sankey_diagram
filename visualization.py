@@ -75,7 +75,7 @@ def prepare_data_for_plotly_sankey(nodes, links):
 
 
 # Create Sankey Diagram
-def create_sankey_diagram(node_labels, source_indices, target_indices, values, node_colors, link_colors, node_x, node_y, diagram_title):
+def create_sankey_diagram(node_labels, source_indices, target_indices, values, node_colors, link_colors, node_x, node_y, diagram_title, annotations=None):
     fig = go.Figure(data=[go.Sankey(
     arrangement="freeform",
     valueformat = ".0f",
@@ -98,6 +98,10 @@ def create_sankey_diagram(node_labels, source_indices, target_indices, values, n
         color = link_colors
     )
     )])
+
+    # If a list of annotations is provided (from the helper), add them to the layout.
+    if annotations is not None:
+        fig.update_layout(annotations=annotations)
 
     fig.update_layout(title_text=diagram_title, font_size=12)
     # fig.update_layout(title_text="Plastic Waste Management - Sankey Diagram", font=dict(size = 10, color = 'white'), plot_bgcolor='black', paper_bgcolor='black')

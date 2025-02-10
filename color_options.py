@@ -96,7 +96,7 @@ def generate_color_options(links, label_to_index):
     return node_colors, link_colors
 
 def generate_node_positions():
-    
+
     # -- Build the x–coordinate list (by node index) --
     node_x = [
         0.0,             # index 0, level 1
@@ -144,3 +144,27 @@ def generate_node_positions():
     ]
 
     return node_x, node_y
+
+def generate_annotations(annotations_dict, label_to_index, node_x, node_y, node_labels):
+    """
+    Generate a list of annotation dictionaries for Plotly layout,
+    based on the annotations_dict where keys are node labels and values
+    are the HTML-formatted annotation text.
+    """
+    annotations = []
+    for label, text in annotations_dict.items():
+        if label in label_to_index:
+            idx = label_to_index[label]
+            annotations.append(dict(
+                x=node_x[idx],
+                y=node_y[idx],
+                xref="paper",
+                yref="paper",
+                text=text,
+                showarrow=True,
+                arrowhead=2,
+                ax=0,
+                ay=-30,
+                font=dict(color="black", size=10)
+            ))
+    return annotations
