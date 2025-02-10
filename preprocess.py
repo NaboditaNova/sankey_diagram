@@ -79,9 +79,9 @@ def process_excel(input_path, output_path):
     summary_df.to_excel(output_excel_path, index=False)
     print(f"\nCombined summary has been written to: {output_excel_path}")
 
-def process_material_composition(input_path, output_path):
+def process_excel_generate_material_composition(input_path, output_path):
     # List of sheet names to process (provide the names here)
-    
+
     # sheet_names = [
     #     "MFA_Template_collection",  # Add other sheet names here
     #     "MFA_Template_sorting_flow_1",   # Example sheet names
@@ -139,3 +139,38 @@ def process_material_composition(input_path, output_path):
     combined_data.to_excel(output_path, index=False)
 
     print(f"Combined Excel file has been created: {output_path}")
+
+
+def generate_annotations(file_path):
+    # Read the Excel file into a DataFrame
+    df = pd.read_excel(file_path)
+
+    df = df.drop(columns=["Name of the sheet"])
+
+    # Create a dictionary to store annotation texts keyed by the label (from "Material name")
+    annotations_dict = {}
+
+    # Process each row in the dataframe
+    for index, row in df.iterrows():
+        # Get the label from the "Material name" column
+        label = row["Material name"]
+        
+        # Get the values for annotation: "Name of the Materials" and "Amount"
+        material_value = str(row["Name of the Materials"])
+        amount_value = str(row["Amount"]).strip()  # Convert to string and remove any extra spaces
+        
+        # If the amount does not end with "%", append it.
+        if not amount_value.endswith("%"):
+            amount_value += "%"
+        
+        # Build the annotation text for this row
+        text_line = f"{material_value}: {amount_value}"
+        
+        # If this label is already in our dictionary, append the text with a <br>;
+        # otherwise, start with the label in bold and then add the text.
+        if label in annotations_dict:
+            annotations_dict[label] += "<br>" + text_line
+        else:
+            annotations_dict[label] = f"<b>{label}</b><br>" + text_line
+
+    return annotations_dict
