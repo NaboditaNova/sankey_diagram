@@ -112,5 +112,3 @@ This project is provided as-is without any warranty. You are free to modify and 
 
 Enjoy visualizing your plastic waste management data!
 
-
-Simply copy the above text and paste it into your Markdown editor (or save it as `README.md`) to use it in your project.
