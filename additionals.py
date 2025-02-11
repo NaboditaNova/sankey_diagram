@@ -115,7 +115,7 @@ def generate_node_positions():
     node_y = [
         0.5,             # index 0, level 1
         0.5,             # index 1, level 2
-        0.25, 0.5, 0.75, # indices 2–4, level 3
+        0.15, 0.5, 0.85, # indices 2–4, level 3
         0.143, 0.286, 0.429, 0.571, 0.714, 0.857,  # indices 5–10, level 4
 
         # For level 5, we assign according to the desired overall rank (1 to 13):

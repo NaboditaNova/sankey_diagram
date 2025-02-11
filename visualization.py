@@ -4,8 +4,6 @@
 
 import pandas as pd
 import plotly.graph_objects as go
-import color_options as co
-
 
 
 def process_data_hierarchical(input_file_path):
