@@ -151,38 +151,38 @@ def generate_annotations(annotations_dict, label_to_index, node_x, node_y):
     based on the annotations_dict where keys are node labels and values
     are the HTML-formatted annotation text.
     """
-    # annotations = []
-    # for label, text in annotations_dict.items():
-    #     if label in label_to_index:
-    #         idx = label_to_index[label]
-    #         annotations.append(dict(
-    #             x=node_x[idx],
-    #             y=node_y[idx],
-    #             xref="paper",
-    #             yref="paper",
-    #             text=text,
-    #             showarrow=True,
-    #             arrowhead=2,
-    #             ax=0,
-    #             ay=-30,
-    #             font=dict(color="black", size=10)
-    #         ))
-    # return annotations
-
     annotations = []
     for label, text in annotations_dict.items():
-        if label in label_to_position:
-            x_pos, y_pos = label_to_position[label]
+        if label in label_to_index:
+            idx = label_to_index[label]
             annotations.append(dict(
-                x=x_pos,
-                y=y_pos,
+                x=node_x[idx],
+                y=node_y[idx],
                 xref="paper",
                 yref="paper",
                 text=text,
                 showarrow=True,
                 arrowhead=2,
                 ax=0,
-                ay=0,
+                ay=-30,
                 font=dict(color="black", size=10)
             ))
     return annotations
+
+    # annotations = []
+    # for label, text in annotations_dict.items():
+    #     if label in label_to_position:
+    #         x_pos, y_pos = label_to_position[label]
+    #         annotations.append(dict(
+    #             x=x_pos,
+    #             y=y_pos,
+    #             xref="paper",
+    #             yref="paper",
+    #             text=text,
+    #             showarrow=True,
+    #             arrowhead=2,
+    #             ax=0,
+    #             ay=0,
+    #             font=dict(color="black", size=10)
+    #         ))
+    # return annotations

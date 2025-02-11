@@ -76,7 +76,7 @@ def prepare_data_for_plotly_sankey(nodes, links):
 
 
 # Create Sankey Diagram
-def create_sankey_diagram(node_labels, source_indices, target_indices, values, node_colors, link_colors, node_x, node_y, diagram_title, label_to_index, annotations_dict=None):
+def create_sankey_diagram(node_labels, source_indices, target_indices, values, node_colors, link_colors, node_x, node_y, diagram_title, annotations=None):
     fig = go.Figure(data=[go.Sankey(
     arrangement="freeform",
     valueformat = ".0f",
@@ -100,13 +100,9 @@ def create_sankey_diagram(node_labels, source_indices, target_indices, values, n
     )
     )])
 
-    # Create a mapping from label to (x, y) coordinates using label_to_index.
-    label_to_position = { label: (node_x[idx], node_y[idx])
-                          for label, idx in label_to_index.items() }
     
     # If annotations_dict is provided, generate annotations using the mapping.
-    if annotations_dict is not None:
-        annotations = co.generate_annotations(annotations_dict, label_to_position)
+    if annotations is not None:
         fig.update_layout(annotations=annotations)
 
     fig.update_layout(title_text=diagram_title, font_size=12)
