@@ -3,7 +3,7 @@
 #################################
 
 def generate_color_options(links, label_to_index):
-    node_colors = [
+    c_list = [
         "rgba(114, 174, 214, 0.8)",
         "rgba(145, 212, 201, 0.8)",
         "rgba(44,160,44,0.8)",
@@ -55,9 +55,9 @@ def generate_color_options(links, label_to_index):
         "rgba(72,61,139,0.8)"
     ]
 
-    link_colors = [node_colors[label_to_index[link['source']]] for link in links]
+    link_colors = [c_list[label_to_index[link['source']]] for link in links]
 
-    return node_colors, link_colors
+    return c_list, link_colors
 
 def generate_node_positions():
 
@@ -89,7 +89,6 @@ def generate_node_positions():
         1/26, 2/26, 3/26, 4/26, 5/26, 6/26, 7/26, 8/26, 9/26, 10/26,
         11/26, 12/26, 13/26, 14/26, 15/26, 16/26, 17/26, 18/26, 19/26, 20/26,
         21/26, 22/26, 23/26, 24/26, 25/26,
-
         1/14, 2/14, 3/14
     ]
 

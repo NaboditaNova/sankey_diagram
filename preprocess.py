@@ -6,7 +6,7 @@ import pandas as pd
 
 def process_excel(input_path, output_path):
 
-    sheet_names = [
+    sh_nms = [
     "Process_collection", 
     "Process_sorting_flow_1", 
     "Process_sorting_flow_2_PP",
@@ -22,31 +22,31 @@ def process_excel(input_path, output_path):
     "Process_recycling_MP"
     ]
 
-    all_summary_rows = []
+    summ_all = []
 
-    for sheet in sheet_names:
+    for sheet in sh_nms:
         df = pd.read_excel(input_path, sheet_name=sheet)
         
-        input_row = df.iloc[13, [1, 3, 4]]
-        input_material_name = input_row.iloc[0]
-        input_material_amount = input_row.iloc[1]
+        row = df.iloc[13, [1, 3, 4]]
+        in_name = row.iloc[0]
+        in_amnt = row.iloc[1]
         
-        output_block = df.iloc[77:84, [1, 3, 4]]
-        output_block = output_block.dropna(subset=[output_block.columns[0]])
+        out_blk = df.iloc[77:84, [1, 3, 4]]
+        out_blk = out_blk.dropna(subset=[out_blk.columns[0]])
         
         first_output = True
-        for idx, row in output_block.iterrows():
+        for idx, row in out_blk.iterrows():
             if first_output:
-                all_summary_rows.append({
+                summ_all.append({
                     "Process Name": sheet,
-                    "Input Material Name": input_material_name,
-                    "Input Material Amount": input_material_amount,
+                    "Input Material Name": in_name,
+                    "Input Material Amount": in_amnt,
                     "Output Material Name": row.iloc[0],
                     "Output Material Amount": row.iloc[1]
                 })
                 first_output = False
             else:
-                all_summary_rows.append({
+                summ_all.append({
                     "Process Name": "",
                     "Input Material Name": "",
                     "Input Material Amount": "",
@@ -54,7 +54,7 @@ def process_excel(input_path, output_path):
                     "Output Material Amount": row.iloc[1]
                 })
 
-    summary_df = pd.DataFrame(all_summary_rows)
+    summary_df = pd.DataFrame(summ_all)
 
     print("Combined Summary Table:")
     print(summary_df)
@@ -65,7 +65,7 @@ def process_excel(input_path, output_path):
 
 def process_excel_generate_material_composition(input_path, output_path):
 
-    sheet_names = [
+    sh_nms = [
         "MFA_Template_collection",
         "MFA_Template_sorting_flow_2_PP",
         "MFA_Template_sorting_flow_2_PS",
@@ -74,27 +74,27 @@ def process_excel_generate_material_composition(input_path, output_path):
         "MFA_Template_sorting_flow_2_Fil",        
     ]
 
-    combined_data = pd.DataFrame()
+    cm_dat = pd.DataFrame()
 
-    for sheet_name in sheet_names:
+    for sheet_name in sh_nms:
         df = pd.read_excel(input_path, sheet_name=sheet_name, header=0)
         
-        material_name = df.columns[2] 
+        m_name = df.columns[2] 
 
-        materials_df = df.iloc[14:30, [1, 2]]
+        m_df = df.iloc[14:30, [1, 2]]
         
-        materials_df.columns = ["Name of the Materials", "Amount"]
+        m_df.columns = ["Name of the Materials", "Amount"]
         
-        materials_df = materials_df.dropna(subset=["Name of the Materials", "Amount"])
+        m_df = m_df.dropna(subset=["Name of the Materials", "Amount"])
         
-        materials_df["Name of the sheet"] = sheet_name
-        materials_df["Material name"] = material_name
+        m_df["Name of the sheet"] = sheet_name
+        m_df["Material name"] = m_name
         
-        materials_df = materials_df[["Name of the sheet", "Material name", "Name of the Materials", "Amount"]]
+        m_df = m_df[["Name of the sheet", "Material name", "Name of the Materials", "Amount"]]
         
-        combined_data = pd.concat([combined_data, materials_df], ignore_index=True)
+        cm_dat = pd.concat([cm_dat, m_df], ignore_index=True)
 
-    combined_data.to_excel(output_path, index=False)
+    cm_dat.to_excel(output_path, index=False)
 
     print(f"Combined Excel file has been created: {output_path}")
 
@@ -104,22 +104,22 @@ def process_excel_generate_annotations(file_path):
 
     df = df.drop(columns=["Name of the sheet"])
 
-    annotations_dict = {}
+    anno = {}
 
     for index, row in df.iterrows():
         label = row["Material name"]
         
-        material_value = str(row["Name of the Materials"])
-        amount_value = str(row["Amount"]).strip()
+        m_val = str(row["Name of the Materials"])
+        amt_val = str(row["Amount"]).strip()
         
-        if not amount_value.endswith("%"):
-            amount_value += "%"
+        if not amt_val.endswith("%"):
+            amt_val += "%"
         
-        text_line = f"{material_value}: {amount_value}"
+        txt_ = f"{m_val}: {amt_val}"
         
-        if label in annotations_dict:
-            annotations_dict[label] += "<br>" + text_line
+        if label in anno:
+            anno[label] += "<br>" + txt_
         else:
-            annotations_dict[label] = f"<b>{label}</b><br>" + text_line
+            anno[label] = f"<b>{label}</b><br>" + txt_
 
-    return annotations_dict
+    return anno

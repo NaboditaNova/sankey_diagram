@@ -9,9 +9,9 @@ import additionals
 def main():
     show_annotations = False
 
-    input_excel_path = r'2025_01_29_combined_table_implementation.xlsm'
-    output_excel_path = r'combined_summary_full_v3.xlsx'
-    material_composition_output_path = r'combined_material_composition.xlsx'
+    input_excel_path = r'YOUR_PATH_HERE'
+    output_excel_path = r'YOUR_PATH_HERE'
+    material_composition_output_path = r'YOUR_PATH_HERE'
 
     preprocess.process_excel(input_excel_path, output_excel_path)
     preprocess.process_excel_generate_material_composition(input_excel_path, material_composition_output_path)
@@ -27,7 +27,7 @@ def main():
         annotations_dict = preprocess.process_excel_generate_annotations(material_composition_output_path)
         annotations = additionals.generate_annotations(annotations_dict, label_to_index, node_x, node_y)
 
-    diagram_title = "Plastic Waste Management - Sankey Diagram"
+    diagram_title = "YOUR TITLE HERE"
     
     # Create the Sankey diagram.
     visualization.create_sankey_diagram(
