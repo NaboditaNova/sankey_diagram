@@ -45,7 +45,7 @@ This project processes Excel files containing plastic waste management data and 
 Install the required Python libraries using pip:
 
 ```bash
-pip install pandas plotly openpyxl
+pip install requirements.txt
 ```
 
 ## How It Works
