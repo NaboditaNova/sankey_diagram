@@ -6,9 +6,12 @@ import pandas as pd
 import plotly.graph_objects as go
 
 
-def process_data_hierarchical(input_file_path):
+def process_data_hierarchical(input_file_path, composition_file_path):
     df = pd.read_excel(input_file_path)
     df = df.fillna(method='ffill')
+
+    # Load the material composition data
+    composition_df = pd.read_excel(composition_file_path)
 
     # Extract values from the first row (row index 0)
     node_label_1 = df.iloc[0, 0]  # Value at position (0,0)
@@ -55,6 +58,35 @@ def process_data_hierarchical(input_file_path):
             'target': tgt,
             'value': val
         })
+
+        # Define the list of nodes for which material composition needs to be added
+    nodes_with_composition = ["Plastics in Different DS", "Mixed Plastics", "PP in PP sorted products", "PS in PS sorted products", "PET in PET sorted products", "HDPE in HDPE sorted products", "Film in film sorted products"]  # Replace with actual node names
+
+    for node_name in nodes_with_composition:
+        # Filter the material composition data for this specific node
+        filtered_composition_df = composition_df[composition_df['Material name'] == node_name]
+
+        # Create a dictionary with 'Name of the Materials' as keys and 'Amount' as values
+        material_composition = dict(zip(filtered_composition_df['Name of the Materials'], filtered_composition_df['Amount']))
+
+        # Add the node if it is not already present
+        if node_name not in node_labels:
+            nodes.append({'label': node_name})
+            node_labels.add(node_name)
+
+        # Add material composition nodes and dashed links
+        for material, value in material_composition.items():
+            if material not in node_labels:
+                nodes.append({'label': material})
+                node_labels.add(material)
+
+            # Add dashed-like links with minimal values and unique color
+            links.append({
+                'source': node_name,  # Dynamic node as the source
+                'target': material,   # Material as the target
+                'value': 0.01         # Minimal value for dashed effect
+            })
+
 
     return nodes, links
 

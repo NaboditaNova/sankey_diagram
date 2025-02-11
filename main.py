@@ -20,7 +20,7 @@ def main():
     preprocess.process_excel_generate_material_composition(input_excel_path, material_composition_output_path)
 
     # Process data for the Sankey diagram
-    nodes, links = visualization.process_data_hierarchical(output_excel_path)
+    nodes, links = visualization.process_data_hierarchical(output_excel_path, material_composition_output_path)
     node_labels, label_to_index, source_indices, target_indices, values = visualization.prepare_data_for_plotly_sankey(nodes, links)
 
     # Generate colors and positions
